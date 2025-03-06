@@ -1,4 +1,5 @@
 // console.log("Hello Just Started");
+require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -78,18 +79,16 @@ app.get("/", (req, res) => {
 //   }
 // });
 
+require("dotenv").config();
+
 mongoose
-  .connect(
-    "mongodb+srv://harshadkataria3:q2rGwAbWBeyfda9I@crudapi.sv8e4.mongodb.net/CrudApi?retryWrites=true&w=majority&appName=CRUDAPI"
-  )
+  .connect(process.env.MONGO_URL)
   .then(() => {
-    console.log("Connected SuccessFully Mongo!");
+    console.log("Connected Successfully to MongoDB!");
     app.listen(3000, () => {
-      console.log("Server Running In  Port 3000");
+      console.log("Server Running on Port 3000");
     });
   })
-
-  .catch(() => {
-    console.log("Connection Failed");
+  .catch((error) => {
+    console.log("Connection Failed", error);
   });
-
